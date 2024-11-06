@@ -13,31 +13,41 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import Link from "next/link";
+import { Button } from "./ui/button";
 
 const Header = () => {
+  const session = "null";
   return (
     <div className="bg-secondary">
       <div className="flex justify-between container mx-auto px-3 py-2">
         <Link href={"/"}>
           <Image src={logo} height={30} width={30} alt="logo" />
         </Link>
-        <Menubar>
-          <MenubarMenu>
-            <MenubarTrigger>
-              <Avatar>
-                <AvatarImage src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGdyYXklMjBiZyUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-            </MenubarTrigger>
-            <MenubarContent>
-              <MenubarItem>Profile</MenubarItem>
-              <MenubarSeparator />
-              <MenubarItem>Appointments</MenubarItem>
-              <MenubarSeparator />
-              <MenubarItem>Logout</MenubarItem>
-            </MenubarContent>
-          </MenubarMenu>
-        </Menubar>
+        {session ? (
+          <Menubar>
+            <MenubarMenu>
+              <MenubarTrigger>
+                <Avatar>
+                  <AvatarImage src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGdyYXklMjBiZyUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+              </MenubarTrigger>
+              <MenubarContent>
+                <Link href={"/profile"}>
+                  <MenubarItem>Profile</MenubarItem>
+                </Link>
+                <MenubarSeparator />
+                <Link href={"/appointments"}>
+                  <MenubarItem>Appointments</MenubarItem>
+                </Link>
+                <MenubarSeparator />
+                <MenubarItem>Logout</MenubarItem>
+              </MenubarContent>
+            </MenubarMenu>
+          </Menubar>
+        ) : (
+          <Button variant="destructive">Login</Button>
+        )}
       </div>
     </div>
   );
