@@ -10,7 +10,7 @@ const HeroSection = () => {
           <h1 className="title-font sm:text-4xl text-2xl mb-4 font-medium text-gray-900">
             DOCTOR APPOINTMENT SYSTEM
             <br className="hidden lg:inline-block" />
-            World Best Doctor's
+            World Best Doctors
           </h1>
           <p className="mb-8 leading-relaxed">
             Copper mug try-hard pitchfork pour-over freegan heirloom neutra air
