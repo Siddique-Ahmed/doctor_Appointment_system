@@ -1,3 +1,4 @@
+import { DatePicker } from "@/components/DatePicker";
 import { Button } from "@/components/ui/button";
 import { doctors } from "@/lib/doctorData";
 import Image from "next/image";
@@ -147,6 +148,7 @@ export default function DoctorDetail({ params }) {
                 <h1 className="md:text-[17px] font-bold">Gender</h1>
                 <h1 className="md:text-[17px] font-semibold">{doctorInfo.gender}</h1>
               </div>
+                <DatePicker/>
                 <Button variant="destructive" className="w-full">Book Appointment</Button>
             </div>
           </div>

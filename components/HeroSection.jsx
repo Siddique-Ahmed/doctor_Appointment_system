@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "./ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -20,7 +21,9 @@ const HeroSection = () => {
           </p>
           <div className="flex gap-5 justify-center">
             <Button variant="destructive">Find Doctor You Need</Button>
+            <Link href={"/appointments/apply"}>
             <Button variant="outline">Apply as a Doctor</Button>
+            </Link>
           </div>
         </div>
         <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 flex justify-end">

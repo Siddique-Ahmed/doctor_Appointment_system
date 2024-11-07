@@ -16,7 +16,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 
 const Header = () => {
-  const session = "null";
+  const session = null;
   return (
     <div className="bg-secondary">
       <div className="flex justify-between container mx-auto px-3 py-2">
@@ -46,7 +46,9 @@ const Header = () => {
             </MenubarMenu>
           </Menubar>
         ) : (
-          <Button variant="destructive">Login</Button>
+          <Link href={"/signin"}>
+            <Button variant="destructive">Login</Button>
+          </Link>
         )}
       </div>
     </div>
