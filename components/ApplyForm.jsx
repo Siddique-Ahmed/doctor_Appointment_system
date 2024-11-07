@@ -1,5 +1,6 @@
 "use client";
-import React from "react";
+import React, { useCallback } from "react";
+import { useDropzone } from "react-dropzone";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -15,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "./ui/textarea";
+import UploadImage from "./UploadImage";
 
 // Define the Zod schema
 const formSchema = z.object({
@@ -34,7 +36,6 @@ const formSchema = z.object({
   address: z.string(),
 });
 
-// Initialize form with default values and schema resolver
 const ApplyForm = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -56,7 +57,11 @@ const ApplyForm = () => {
     },
   });
 
-  // Handle form submission
+  const onDrop = useCallback((acceptedFiles) => {
+    console.log("Files dropped:", acceptedFiles);
+  }, []);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
   const onSubmit = (values) => {
     console.log(values);
   };
@@ -213,20 +218,6 @@ const ApplyForm = () => {
           />
         </div>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          {/* Profile Image URL Field */}
-          <FormField
-            name="profileImg"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Profile Image URL</FormLabel>
-                <FormControl>
-                  <Input placeholder="Enter profile image URL" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
           {/* Contact Number Field */}
           <FormField
             name="number"
@@ -241,23 +232,10 @@ const ApplyForm = () => {
             )}
           />
         </div>
+        
 
-        {/* Bio Field */}
         <FormField
-          name="bio"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Bio</FormLabel>
-              <FormControl>
-                <Textarea placeholder="Enter a short bio" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* Address Field */}
-        <FormField
+          control={form.control}
           name="address"
           render={({ field }) => (
             <FormItem>
@@ -270,7 +248,8 @@ const ApplyForm = () => {
           )}
         />
 
-        {/* Submit Button */}
+        <UploadImage />
+
         <Button type="submit">Submit</Button>
       </form>
     </Form>
