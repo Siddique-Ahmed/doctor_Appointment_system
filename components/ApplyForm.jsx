@@ -232,7 +232,6 @@ const ApplyForm = () => {
             )}
           />
         </div>
-        
 
         <FormField
           control={form.control}
