@@ -14,9 +14,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { auth, signOut } from "../auth";
 
-const Header = () => {
-  const session = null;
+const Header = async () => {
+  const session = await auth();
+  console.log("session==>>", session);
+
   return (
     <div className="bg-secondary">
       <div className="flex justify-between container mx-auto px-3 py-2">
@@ -28,7 +31,7 @@ const Header = () => {
             <MenubarMenu>
               <MenubarTrigger>
                 <Avatar>
-                  <AvatarImage src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGdyYXklMjBiZyUyMHByb2ZpbGV8ZW58MHx8MHx8fDA%3D" />
+                  <AvatarImage src={session?.user?.image} />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
               </MenubarTrigger>
@@ -41,7 +44,16 @@ const Header = () => {
                   <MenubarItem>Appointments</MenubarItem>
                 </Link>
                 <MenubarSeparator />
-                <MenubarItem>Logout</MenubarItem>
+                <form
+                  action={async () => {
+                    "use server";
+                    await signOut();
+                  }}
+                >
+                  <Button className="w-full" type="submit" variant="outline">
+                    Logout
+                  </Button>
+                </form>
               </MenubarContent>
             </MenubarMenu>
           </Menubar>
